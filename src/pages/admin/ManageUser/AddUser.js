@@ -8,63 +8,62 @@ import { underControl } from '../../../redux/userRelated/userSlice';
 import { CircularProgress } from '@mui/material';
 
 const AddTeacher = () => {
-  const params = useParams()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const params = useParams()
+  // const dispatch = useDispatch()
+  // const navigate = useNavigate()
 
-  const subjectID = params.id
+  // const subjectID = params.id
 
-  const { status, response, error } = useSelector(state => state.user);
-  const { subjectDetails } = useSelector((state) => state.sclass);
+  // const { status, response, error } = useSelector(state => state.user);
+  // const { subjectDetails } = useSelector((state) => state.sclass);
 
-  useEffect(() => {
-    dispatch(getSubjectDetails(subjectID, "Subject"));
-  }, [dispatch, subjectID]);
+  // useEffect(() => {
+  //   dispatch(getSubjectDetails(subjectID, "Subject"));
+  // }, [dispatch, subjectID]);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('')
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('')
 
-  const [showPopup, setShowPopup] = useState(false);
-  const [message, setMessage] = useState("");
-  const [loader, setLoader] = useState(false)
+  // const [showPopup, setShowPopup] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [loader, setLoader] = useState(false)
 
-  const role = "Teacher"
-  const school = subjectDetails && subjectDetails.school
-  const teachSubject = subjectDetails && subjectDetails._id
-  const teachSclass = subjectDetails && subjectDetails.sclassName && subjectDetails.sclassName._id
+  // const role = "Teacher"
+  // const school = subjectDetails && subjectDetails.school
+  // const teachSubject = subjectDetails && subjectDetails._id
+  // const teachSclass = subjectDetails && subjectDetails.sclassName && subjectDetails.sclassName._id
 
-  const fields = { name, email, password, role, school, teachSubject, teachSclass }
+  // const fields = { name, email, password, role, school, teachSubject, teachSclass }
 
-  const submitHandler = (event) => {
-    event.preventDefault()
-    setLoader(true)
-    dispatch(registerUser(fields, role))
-  }
+  // const submitHandler = (event) => {
+  //   event.preventDefault()
+  //   setLoader(true)
+  //   dispatch(registerUser(fields, role))
+  // }
 
-  useEffect(() => {
-    if (status === 'added') {
-      dispatch(underControl())
-      navigate("/Admin/teachers")
-    }
-    else if (status === 'failed') {
-      setMessage(response)
-      setShowPopup(true)
-      setLoader(false)
-    }
-    else if (status === 'error') {
-      setMessage("Network Error")
-      setShowPopup(true)
-      setLoader(false)
-    }
-  }, [status, navigate, error, response, dispatch]);
+  // useEffect(() => {
+  //   if (status === 'added') {
+  //     dispatch(underControl())
+  //     navigate("/Admin/teachers")
+  //   }
+  //   else if (status === 'failed') {
+  //     setMessage(response)
+  //     setShowPopup(true)
+  //     setLoader(false)
+  //   }
+  //   else if (status === 'error') {
+  //     setMessage("Network Error")
+  //     setShowPopup(true)
+  //     setLoader(false)
+  //   }
+  // }, [status, navigate, error, response, dispatch]);
 
   return (
     <div>
-      <div className="register">
-        <form className="registerForm" onSubmit={submitHandler}>
-          <span className="registerTitle">Add Teacher</span>
-          <br />
+      {/* <div className="register">
+        <form className="registerForm" >
+         
           <label>
             Subject : {subjectDetails && subjectDetails.subName}
           </label>
@@ -98,7 +97,8 @@ const AddTeacher = () => {
           </button>
         </form>
       </div>
-      <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
+      <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} /> */}
+      <i class="fas fa-h1">Add user</i>
     </div>
   )
 }

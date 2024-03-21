@@ -78,8 +78,8 @@ const ShowTeachers = () => {
   //     { id: 'teachSclass', label: 'Class', minWidth: 170 },
   // ];
 
-  function createData(name, email, role) {
-    return { name, email, role };
+  function createData(name, email, role, status) {
+    return { name, email, role, status };
   }
 
   const rows = [
@@ -121,8 +121,10 @@ const ShowTeachers = () => {
             <TableCell>Name</TableCell>
             <TableCell align="left">Email</TableCell>
             <TableCell align="left">Role</TableCell>
+            <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           {rows.map((row) => (
             <TableRow
@@ -133,7 +135,7 @@ const ShowTeachers = () => {
                 {row.name}
               </TableCell>
               <TableCell align="left">{row.email}</TableCell>
-              <TableCell align="left">{row.role}</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>

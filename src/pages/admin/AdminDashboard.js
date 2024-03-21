@@ -20,6 +20,7 @@ import AdminHomePage from "./AdminHomePage";
 import AdminProfile from "./AdminProfile";
 import ShowUser from "./ManageUser/ShowUser";
 import ShowAcademicYear from "./AcademicYear/ShowAcademicYear";
+import AddAcademicYear from "./AcademicYear/AddAcademicYear";
 
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -81,6 +82,7 @@ const AdminDashboard = () => {
             <Route path="/Admin/account" element={<ShowUser />} />
             <Route path="/Admin/profile" element={<AdminProfile />} />
             <Route path="/Admin/academic_year" element={<ShowAcademicYear />} />
+            <Route path="/Admin/add_academic_year" element={<AddAcademicYear />} />
 
             {/* Notice */}
             {/* <Route path="/Admin/addnotice" element={<AddNotice />} />

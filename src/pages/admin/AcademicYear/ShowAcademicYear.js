@@ -1,213 +1,86 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { getAllStudents } from '../../../redux/studentRelated/studentHandle';
-import { deleteUser } from '../../../redux/userRelated/userHandle';
-import {
-    Paper, Box, IconButton
-} from '@mui/material';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import { BlackButton, BlueButton, GreenButton } from '../../../components/buttonStyles';
-import TableTemplate from '../../../components/TableTemplate';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
 
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Popup from '../../../components/Popup';
+import React, { useState } from 'react';
+import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { GreenButton, BlueButton, RedButton } from '../../../components/buttonStyles';
+import TableTemplate from '../../../components/TableTemplate';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const ShowAcademicYear = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State to manage delete confirmation dialog
 
-    // const navigate = useNavigate()
-    // const dispatch = useDispatch();
-    // const { studentsList, loading, error, response } = useSelector((state) => state.student);
-    // const { currentUser } = useSelector(state => state.user)
+    const handleDelete = () => {
+        // Dispatch delete action here
+        // For demo purposes, just console log
+        console.log("Delete confirmed");
+        setDeleteConfirmationOpen(false); // Close the confirmation dialog
+    };
 
-    // useEffect(() => {
-    //     dispatch(getAllStudents(currentUser._id));
-    // }, [currentUser._id, dispatch]);
+    const ButtonContainer = ({ children }) => {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                {children}
+            </div>
+        );
+    };
 
-    // if (error) {
-    //     console.log(error);
-    // }
+    const years = [
+        { id: 1, academicYear: 'Year2023', openDate: "1/1/2022", closeDate: "1/1/2023", des: "ABC" },
+        // Other year data...
+    ];
 
-    // const [showPopup, setShowPopup] = React.useState(false);
-    // const [message, setMessage] = React.useState("");
+    const Columns = [
+        { id: 'id', label: 'ID' },
+        { id: 'academicYear', label: 'Academic Year' },
+        { id: 'openDate', label: 'Open Date' },
+        { id: 'closeDate', label: 'Close Date' },
+        { id: 'des', label: 'Description' },
+    ];
 
-    // const deleteHandler = (deleteID, address) => {
-    //     console.log(deleteID);
-    //     console.log(address);
-    //     setMessage("Sorry the delete function has been disabled for now.")
-    //     setShowPopup(true)
+    const Rows = years.map(year => ({
+        academicYear: year.academicYear,
+        openDate: year.openDate,
+        closeDate: year.closeDate,
+        des: year.des,
+        id: year.id,
+    }));
 
-    //     // dispatch(deleteUser(deleteID, address))
-    //     //     .then(() => {
-    //     //         dispatch(getAllStudents(currentUser._id));
-    //     //     })
-    // }
-
-    // const studentColumns = [
-    //     { id: 'name', label: 'Name', minWidth: 170 },
-    //     { id: 'rollNum', label: 'Roll Number', minWidth: 100 },
-    //     { id: 'sclassName', label: 'Class', minWidth: 170 },
-    // ]
-
-    // const studentRows = studentsList && studentsList.length > 0 && studentsList.map((student) => {
-    //     return {
-    //         name: student.name,
-    //         rollNum: student.rollNum,
-    //         sclassName: student.sclassName.sclassName,
-    //         id: student._id,
-    //     };
-    // })
-
-    // const StudentButtonHaver = ({ row }) => {
-    //     const options = ['Take Attendance', 'Provide Marks'];
-
-    //     const [open, setOpen] = React.useState(false);
-    //     const anchorRef = React.useRef(null);
-    //     const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-    //     const handleClick = () => {
-    //         console.info(`You clicked ${options[selectedIndex]}`);
-    //         if (selectedIndex === 0) {
-    //             handleAttendance();
-    //         } else if (selectedIndex === 1) {
-    //             handleMarks();
-    //         }
-    //     };
-
-    //     const handleAttendance = () => {
-    //         navigate("/Admin/students/student/attendance/" + row.id)
-    //     }
-    //     const handleMarks = () => {
-    //         navigate("/Admin/students/student/marks/" + row.id)
-    //     };
-
-    //     const handleMenuItemClick = (event, index) => {
-    //         setSelectedIndex(index);
-    //         setOpen(false);
-    //     };
-
-    //     const handleToggle = () => {
-    //         setOpen((prevOpen) => !prevOpen);
-    //     };
-
-    //     const handleClose = (event) => {
-    //         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-    //             return;
-    //         }
-
-    //         setOpen(false);
-    //     };
-    //     return (
-    //         <>
-    //             <IconButton onClick={() => deleteHandler(row.id, "Student")}>
-    //                 <PersonRemoveIcon color="error" />
-    //             </IconButton>
-    //             <BlueButton variant="contained"
-    //                 onClick={() => navigate("/Admin/students/student/" + row.id)}>
-    //                 View
-    //             </BlueButton>
-    //             <React.Fragment>
-    //                 <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-    //                     <Button onClick={handleClick}>{options[selectedIndex]}</Button>
-    //                     <BlackButton
-    //                         size="small"
-    //                         aria-controls={open ? 'split-button-menu' : undefined}
-    //                         aria-expanded={open ? 'true' : undefined}
-    //                         aria-label="select merge strategy"
-    //                         aria-haspopup="menu"
-    //                         onClick={handleToggle}
-    //                     >
-    //                         {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-    //                     </BlackButton>
-    //                 </ButtonGroup>
-    //                 <Popper
-    //                     sx={{
-    //                         zIndex: 1,
-    //                     }}
-    //                     open={open}
-    //                     anchorEl={anchorRef.current}
-    //                     role={undefined}
-    //                     transition
-    //                     disablePortal
-    //                 >
-    //                     {({ TransitionProps, placement }) => (
-    //                         <Grow
-    //                             {...TransitionProps}
-    //                             style={{
-    //                                 transformOrigin:
-    //                                     placement === 'bottom' ? 'center top' : 'center bottom',
-    //                             }}
-    //                         >
-    //                             <Paper>
-    //                                 <ClickAwayListener onClickAway={handleClose}>
-    //                                     <MenuList id="split-button-menu" autoFocusItem>
-    //                                         {options.map((option, index) => (
-    //                                             <MenuItem
-    //                                                 key={option}
-    //                                                 disabled={index === 2}
-    //                                                 selected={index === selectedIndex}
-    //                                                 onClick={(event) => handleMenuItemClick(event, index)}
-    //                                             >
-    //                                                 {option}
-    //                                             </MenuItem>
-    //                                         ))}
-    //                                     </MenuList>
-    //                                 </ClickAwayListener>
-    //                             </Paper>
-    //                         </Grow>
-    //                     )}
-    //                 </Popper>
-    //             </React.Fragment>
-    //         </>
-    //     );
-    // };
-
-    // const actions = [
-    //     {
-    //         icon: <PersonAddAlt1Icon color="primary" />, name: 'Add New Student',
-    //         action: () => navigate("/Admin/addstudents")
-    //     },
-    //     {
-    //         icon: <PersonRemoveIcon color="error" />, name: 'Delete All Students',
-    //         action: () => deleteHandler(currentUser._id, "Students")
-    //     },
-    // ];
+    const SclassButtonHaver = ({ row }) => {
+        return (
+            <ButtonContainer>
+                <BlueButton variant="contained">
+                    Edit
+                </BlueButton>
+                <RedButton color="secondary" onClick={() => setDeleteConfirmationOpen(true)}>
+                    Delete
+                </RedButton>
+            </ButtonContainer>
+        );
+    };
 
     return (
         <>
-            {/* {loading ?
-                <div>Loading...</div>
-                :
-                <>
-                    {response ?
-                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
-                            <GreenButton variant="contained" onClick={() => navigate("/Admin/addstudents")}>
-                                Add Students
-                            </GreenButton>
-                        </Box>
-                        :
-                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            {Array.isArray(studentsList) && studentsList.length > 0 &&
-                                <TableTemplate buttonHaver={StudentButtonHaver} columns={studentColumns} rows={studentRows} />
-                            }
-                            <SpeedDialTemplate actions={actions} />
-                        </Paper>
-                    }
-                </>
-            }
-            <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} /> */}
-            <div>show academic year</div>
+           
+            <TableTemplate  buttonHaver={SclassButtonHaver} columns={Columns} rows={Rows} />
+            <Dialog open={deleteConfirmationOpen} onClose={() => setDeleteConfirmationOpen(false)}>
+                <DialogTitle>Delete Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>s
+                        Are you sure you want to delete this item?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <RedButton onClick={handleDelete}>Yes</RedButton>
+                    <BlueButton onClick={() => setDeleteConfirmationOpen(false)}>No</BlueButton>
+                </DialogActions>
+            </Dialog>
+            <Box  sx={{ display: 'flex' ,justifyContent: 'flex-end', marginTop: '16px' }}>
+                <GreenButton variant="contained" onClick={() => navigate("/Admin/add_academic_year")}>
+                    Add Academic Years
+                </GreenButton>
+            </Box>
         </>
     );
 };

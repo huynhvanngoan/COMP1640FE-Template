@@ -1,11 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+
+import React, { useEffect, useState } from "react";
+import { Box, Button, CircularProgress, Stack, TextField } from "@mui/material";
+import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../../redux/userRelated/userHandle';
-import Popup from '../../../components/Popup';
+import { addStuff } from '../../../redux/userRelated/userHandle';
 import { underControl } from '../../../redux/userRelated/userSlice';
-import { getAllSclasses } from '../../../redux/sclassRelated/sclassHandle';
-import { CircularProgress } from '@mui/material';
+import { BlueButton } from "../../../components/buttonStyles";
+import Popup from "../../../components/Popup";
+import Classroom from "../../../assets/classroom.png";
+import styled from "styled-components";
+
+
+const StyledContainer = styled(Box)`
+  flex: 1 1 auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledBox = styled(Box)`
+  max-width: 500px;
+  padding: 40px 3rem 40px;
+  margin-top: 1rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
 
 const AddAcademicYear = ({ situation }) => {
     const dispatch = useDispatch()
@@ -16,129 +37,95 @@ const AddAcademicYear = ({ situation }) => {
     const { status, currentUser, response, error } = userState;
     const { sclassesList } = useSelector((state) => state.sclass);
 
-    // const [name, setName] = useState('');
-    // const [rollNum, setRollNum] = useState('');
-    // const [password, setPassword] = useState('')
-    // const [className, setClassName] = useState('')
-    // const [sclassName, setSclassName] = useState('')
+    // Define submitHandler, sclassName, setSclassName, loader, message, setShowPopup, showPopup
+    const [year, setYears] = useState("");
+    const [des, setDes] = useState("");
+    const [loader, setLoader] = useState(false);
+    const [message, setMessage] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+    const [openDate, setOpenDate] = useState('');
+    const [closeDate, setCloseDate] = useState('');
 
-    // const adminID = currentUser._id
-    // const role = "Student"
-    // const attendance = []
-
-    // useEffect(() => {
-    //     if (situation === "Class") {
-    //         setSclassName(params.id);
-    //     }
-    // }, [params.id, situation]);
-
-    // const [showPopup, setShowPopup] = useState(false);
-    // const [message, setMessage] = useState("");
-    // const [loader, setLoader] = useState(false)
-
-    // useEffect(() => {
-    //     dispatch(getAllSclasses(adminID, "Sclass"));
-    // }, [adminID, dispatch]);
-
-    // const changeHandler = (event) => {
-    //     if (event.target.value === 'Select Class') {
-    //         setClassName('Select Class');
-    //         setSclassName('');
-    //     } else {
-    //         const selectedClass = sclassesList.find(
-    //             (classItem) => classItem.sclassName === event.target.value
-    //         );
-    //         setClassName(selectedClass.sclassName);
-    //         setSclassName(selectedClass._id);
-    //     }
-    // }
-
-    // const fields = { name, rollNum, password, sclassName, adminID, role, attendance }
-
-    // const submitHandler = (event) => {
-    //     event.preventDefault()
-    //     if (sclassName === "") {
-    //         setMessage("Please select a classname")
-    //         setShowPopup(true)
-    //     }
-    //     else {
-    //         setLoader(true)
-    //         dispatch(registerUser(fields, role))
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     if (status === 'added') {
-    //         dispatch(underControl())
-    //         navigate(-1)
-    //     }
-    //     else if (status === 'failed') {
-    //         setMessage(response)
-    //         setShowPopup(true)
-    //         setLoader(false)
-    //     }
-    //     else if (status === 'error') {
-    //         setMessage("Network Error")
-    //         setShowPopup(true)
-    //         setLoader(false)
-    //     }
-    // }, [status, navigate, error, response, dispatch]);
-
+    const submitHandler = (event) => {
+        event.preventDefault();
+        setLoader(true); // Set loader to true when form is submitted
+        // Your submit logic here, you can set loader to false when operation is completed
+    }
+   
     return (
         <>
-            {/* <div className="register">
-                <form className="registerForm" >
-                    <span className="registerTitle">Add Student</span>
-                    <label>Name</label>
-                    <input className="registerInput" type="text" placeholder="Enter student's name..."
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        autoComplete="name" required />
-
-                    {
-                        situation === "Student" &&
-                        <>
-                            <label>Class</label>
-                            <select
-                                className="registerInput"
-                                value={className}
-                                onChange={changeHandler} required>
-                                <option value='Select Class'>Select Class</option>
-                                {sclassesList.map((classItem, index) => (
-                                    <option key={index} value={classItem.sclassName}>
-                                        {classItem.sclassName}
-                                    </option>
-                                ))}
-                            </select>
-                        </>
-                    }
-
-                    <label>Roll Number</label>
-                    <input className="registerInput" type="number" placeholder="Enter student's Roll Number..."
-                        value={rollNum}
-                        onChange={(event) => setRollNum(event.target.value)}
-                        required />
-
-                    <label>Password</label>
-                    <input className="registerInput" type="password" placeholder="Enter student's password..."
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        autoComplete="new-password" required />
-
-                    <button className="registerButton" type="submit" disabled={loader}>
-                        {loader ? (
-                            <CircularProgress size={24} color="inherit" />
-                        ) : (
-                            'Add'
-                        )}
-                    </button>
-                </form>
-            </div>
-            <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} /> */}
-            <div>Academic year</div>
+           
+           <StyledContainer>
+                <StyledBox>
+                    <Stack sx={{
+                        alignItems: 'center',
+                        mb: 3
+                    }}>
+                        <img
+                            src={Classroom}
+                            alt="classroom"
+                            style={{ width: '80%' }}
+                        />
+                    </Stack>
+                    <form onSubmit={submitHandler}>
+                        <Stack spacing={3}>
+                            <TextField
+                                label="Create Name Academic"
+                                variant="outlined"
+                                value={year}
+                                onChange={(event) => {
+                                    setYears(event.target.value);
+                                }}
+                                required
+                            />
+                             <TextField
+                                            label="Select Open Date"
+                                            type="date"
+                                            value={openDate}
+                                            onChange={(event) => setOpenDate(event.target.value)} required
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                              <TextField
+                                            label="Select Close Date"
+                                            type="date"
+                                            value={closeDate}
+                                            onChange={(event) => setCloseDate(event.target.value)} required
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                <TextField
+                                            label="Descriptions"
+                                            variant="outlined"
+                                              value={des}
+                                            onChange={(event) => {
+                                          setDes(event.target.value);
+                                }}
+                                required
+                            />
+                            <BlueButton
+                                fullWidth
+                                size="large"
+                                sx={{ mt: 3 }}
+                                variant="contained"
+                                type="submit"
+                                disabled={loader}
+                            >
+                                {loader ? <CircularProgress size={24} color="inherit" /> : "Create"}
+                            </BlueButton>
+                            <Button variant="outlined" onClick={() => navigate(-1)}>
+                                Go Back
+                            </Button>
+                        </Stack>
+                    </form>
+                </StyledBox>
+            </StyledContainer>
+            <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
 
         </>
     )
 }
 
-export default AddAcademicYear
+export default AddAcademicYear;

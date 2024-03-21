@@ -26,7 +26,7 @@ const StyledBox = styled(Box)`
   border-radius: 4px;
 `;
 
-const AddUser = ({ situation }) => {
+const EditUser = ({ situation }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -68,6 +68,7 @@ const AddUser = ({ situation }) => {
                 label="Email"
                 variant="outlined"
                 value={email}
+                disabled
                 onChange={(event) => {
                   setEmail(event.target.value);
                 }}
@@ -86,8 +87,8 @@ const AddUser = ({ situation }) => {
               <TextField
                 label="Confirm Password"
                 variant="outlined"
-                value={confirmPassword}
                 type="password"
+                value={confirmPassword}
                 onChange={(event) => {
                   setConfirmPassword(event.target.value);
                 }}
@@ -104,7 +105,7 @@ const AddUser = ({ situation }) => {
                 {loader ? (
                   <CircularProgress size={24} color="inherit" />
                 ) : (
-                  "Create"
+                  "Edit"
                 )}
               </BlueButton>
               <Button variant="outlined" onClick={() => navigate(-1)}>
@@ -123,4 +124,4 @@ const AddUser = ({ situation }) => {
   );
 };
 
-export default AddUser;
+export default EditUser;

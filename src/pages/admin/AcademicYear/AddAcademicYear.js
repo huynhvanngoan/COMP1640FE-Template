@@ -129,3 +129,4 @@ const AddAcademicYear = ({ situation }) => {
 }
 
 export default AddAcademicYear;
+

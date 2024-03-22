@@ -1,11 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+"use client"
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Grid, Box, Button } from '@mui/material';
 import styled from 'styled-components';
 import Students from "../assets/students.svg";
 import { LightPurpleButton } from '../components/buttonStyles';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { loginUser } from '../redux/userRelated/userHandle';
 const Homepage = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const password = "zxc"
+  
+    const { status, currentUser, currentRole } = useSelector(state => state.user);;
+  
+    const [loader, setLoader] = useState(false)
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState("");
+  
+    const navigateHandler = (user) => {
+      if (user === "Admin") {
+          const email = "yogendra@12"
+          const fields = { email, password }
+          setLoader(true)
+          dispatch(loginUser(fields, user))
+        }
+    }
+    useEffect(() => {
+        if (status === 'success' || currentUser !== null) {
+          if (currentRole === 'Admin') {
+            navigate('/Admin/dashboard');
+          }
+          else if (currentRole === 'Student') {
+            navigate('/Student/dashboard');
+          } else if (currentRole === 'Teacher') {
+            navigate('/Teacher/dashboard');
+          }
+        }
+        else if (status === 'error') {
+          setLoader(false)
+          setMessage("Network Error")
+          setShowPopup(true)
+        }
+      }, [status, currentRole, navigate, currentUser]);
     return (
         <StyledContainer>
             <Grid container spacing={0}>
@@ -27,7 +65,7 @@ const Homepage = () => {
                             Access records, view marks, and communicate effortlessly.
                         </StyledText>
                         <StyledBox>
-                            <StyledLink to="/choose">
+                            <StyledLink onClick={() => navigateHandler("Admin")}>
                                 <LightPurpleButton variant="contained" fullWidth>
                                     Login
                                 </LightPurpleButton>
@@ -39,12 +77,6 @@ const Homepage = () => {
                                     Login as Guest
                                 </Button>
                             </StyledLink>
-                            <StyledText>
-                                Don't have an account?{' '}
-                                <Link to="/Adminregister" style={{color:"#550080"}}>
-                                    Sign up
-                                </Link>
-                            </StyledText>
                         </StyledBox>
                     </StyledPaper>
                 </Grid>

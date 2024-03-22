@@ -8,6 +8,7 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import LoginPage from './pages/LoginPage';
 import AdminRegisterPage from './pages/admin/AdminRegisterPage';
 import ChooseUser from './pages/ChooseUser';
+import PageGuest from './pages/guest/PageGuest';
 
 const App = () => {
   const { currentRole } = useSelector(state => state.user);
@@ -18,7 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/choose" element={<ChooseUser visitor="normal" />} />
-          <Route path="/chooseasguest" element={<ChooseUser visitor="guest" />} />
+          <Route path="/guest" element={<PageGuest/>} />
 
           <Route path="/Adminlogin" element={<LoginPage role="Admin" />} />
           <Route path="/Studentlogin" element={<LoginPage role="Student" />} />

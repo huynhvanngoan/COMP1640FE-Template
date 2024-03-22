@@ -59,7 +59,7 @@ const ChooseUser = ({ visitor }) => {
         dispatch(loginUser(fields, user))
       }
       else {
-        navigate('/Teacherlogin');
+        navigate('/teacherlogin');
       }
     }
   }

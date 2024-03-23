@@ -7,6 +7,7 @@ import StudentDashboard from './pages/student/StudentDashboard';
 import DepartmentDashboard from './pages/department/DepartmentDashboard';
 import MarketingDashboard from './pages/marketing/MarketingDashboard';
 import GuestDashboard from './pages/guest/GuestDashboard';
+import ListStudentArticles from './pages/student/StudentListArticles';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/department-dashboard" element={<DepartmentDashboard />}/>
 
           <Route path="/marketing-dashboard" element={<MarketingDashboard />}/>
+          <Route path="/student-list-article" element={<ListStudentArticles />}/>
         
           <Route path='*' element={<Navigate to="/login" />} />
           

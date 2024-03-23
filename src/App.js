@@ -9,6 +9,7 @@ import MarketingDashboard from './pages/marketing/MarketingDashboard';
 
  
 import GuestDashboard from './pages/guest/GuestDashboard';
+import ListStudentArticles from './pages/student/StudentListArticles';
 
 
 const App = () => {
@@ -28,8 +29,6 @@ const App = () => {
           <Route path="/department-dashboard" element={<DepartmentDashboard />}/>
 
           <Route path="/marketing-dashboard" element={<MarketingDashboard />}/>
-
-          {/* <Route path='/marketing-homepage' element={<MarketingHomePage  />}/> */}
         
           <Route path='*' element={<Navigate to="/login" />} />
           

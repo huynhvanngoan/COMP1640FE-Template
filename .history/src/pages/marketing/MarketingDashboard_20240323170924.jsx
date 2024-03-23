@@ -208,10 +208,9 @@ export default function MiniDrawer() {
       </Drawer>
       <Box
         component="main"
-        sx={{ marginTop: "80px", marginLeft: "auto", // Căn lề bên trái tự động
-        marginRight: "auto"}}
+        sx={{ marginTop: "80px", marginLeft: "20px", width: "auto", display: "flex" it}}
       >
-        <TableContainer component={Paper} md={{ width: "100vh" }}>
+        <TableContainer component={Paper} sx={{ width: "auto" }}>
           <Table sx={{ width: "100vh" }} aria-label="simple table">
             <TableHead>
               <TableRow>

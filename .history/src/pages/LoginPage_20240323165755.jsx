@@ -53,7 +53,7 @@ const LoginPage = () => {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh',justifyContent: 'center', alignItems: 'center' }}>
-            <Grid item xs={6} md={4}>
+            <Grid item xs={8} md={4}>
                     <img src={Students} alt="students" style={{ width: '100%' }} />
                 </Grid>
                 <CssBaseline />

@@ -138,7 +138,7 @@ export default function MiniDrawer() {
   ];
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{ display: "flex" }}>
         <Toolbar>
@@ -211,7 +211,7 @@ export default function MiniDrawer() {
         sx={{ marginTop: "80px", marginLeft: "auto", // Căn lề bên trái tự động
         marginRight: "auto"}}
       >
-        <TableContainer component={Paper} md={{ width: "100vh" }}>
+        <TableContainer component={Paper} sx={{ width: "auto" }}>
           <Table sx={{ width: "100vh" }} aria-label="simple table">
             <TableHead>
               <TableRow>

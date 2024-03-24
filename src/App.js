@@ -8,7 +8,7 @@ import GuestDashboard from './pages/guest/GuestDashboard';
 
 import Layout from './pages/admin/layout';
 
-import ListStudentArticles from './pages/student/StudentListArticles';
+
 
 
 const App = () => {
@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage/>} />
       
           <Route path="/admin" element={<Layout />}/>
+  
 
           <Route path="/student-dashboard" element={<StudentDashboard />}/>
 

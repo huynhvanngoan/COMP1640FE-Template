@@ -7,7 +7,6 @@ import { LightPurpleButton } from '../components/buttonStyles';
 import styled from 'styled-components';
 import Students from "../assets/students.svg";
 import { useNavigate } from "react-router-dom";
-
 const defaultTheme = createTheme();
 
 const LoginPage = () => {
@@ -34,7 +33,7 @@ const LoginPage = () => {
         setLoading(false);
         const content = await response.json();
         if (response.ok) {
-            setRedirectUrl(content.redirectUrl); // Assuming backend sends redirectUrl
+            setRedirectUrl(content.redirectUrl); 
         }
         if (!email || !password) {
             if (!email) setEmailError(true);
@@ -44,7 +43,6 @@ const LoginPage = () => {
     }
     
     useEffect(() => {
-        // Redirect when redirectUrl is set
         if (redirectUrl) {
             navigate(redirectUrl);
         }
@@ -53,7 +51,7 @@ const LoginPage = () => {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh',justifyContent: 'center', alignItems: 'center' }}>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={6} md={4}>
                     <img src={Students} alt="students" style={{ width: '100%' }} />
                 </Grid>
                 <CssBaseline />

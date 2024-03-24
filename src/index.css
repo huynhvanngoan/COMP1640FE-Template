@@ -1,26 +1,8 @@
 * {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
 }
-.container{
-  width: 100vw;
-  min-height: 100vw;
-  background: #ced8ff;
-}
-.content{
 
-  height: 100vh;
-  width: auto;
-  align-items: center;
-  margin: 50px 40px 40px 50px;  
-
-}
-.context{
-  align-items: center;
-}
 a {
   text-decoration: none;
   color: inherit;
@@ -28,6 +10,13 @@ a {
 
 ::-webkit-scrollbar {
   display: none;
+}
+.NavbarStudent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Đảm bảo navbar luôn hiển thị phía trên nội dung */
 }
 
 :root {
@@ -111,3 +100,6 @@ a {
     border-radius: 12px;
   }
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

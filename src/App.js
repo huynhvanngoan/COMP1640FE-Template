@@ -1,14 +1,13 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
-
-import AdminDashboard from './pages/admin/AdminDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
 import DepartmentDashboard from './pages/department/DepartmentDashboard';
 import MarketingDashboard from './pages/marketing/MarketingDashboard';
-
- 
 import GuestDashboard from './pages/guest/GuestDashboard';
+
+import Layout from './pages/admin/layout';
+
 import ListStudentArticles from './pages/student/StudentListArticles';
 
 
@@ -20,7 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginPage/>} />
       
-          <Route path="/admin-dashboard" element={<AdminDashboard />}/>
+          <Route path="/admin" element={<Layout />}/>
 
           <Route path="/student-dashboard" element={<StudentDashboard />}/>
 

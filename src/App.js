@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginPage from './pages/LoginPage';
 import StudentDashboard from './pages/student/StudentDashboard';
 import DepartmentDashboard from './pages/department/DepartmentDashboard';
-import MarketingDashboard from './pages/marketing/MarketingDashboard';
 import GuestDashboard from './pages/guest/GuestDashboard';
 
 import Layout from './pages/admin/layout';
+import LayoutMarketing from './pages/marketing/LayoutMarketing';
 
 
 
@@ -28,7 +28,7 @@ const App = () => {
 
           <Route path="/department-dashboard" element={<DepartmentDashboard />}/>
 
-          <Route path="/marketing-dashboard" element={<MarketingDashboard />}/>
+          <Route path="/marketing-dashboard" element={<LayoutMarketing />}/>
         
           <Route path='*' element={<Navigate to="/login" />} />
           
